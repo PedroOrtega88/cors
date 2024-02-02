@@ -1,39 +1,35 @@
 const express = require('express');
 const axios = require('axios');
-const cors = require('cors');
+const cors = require('cors'); 
 
 const app = express();
-const PORT = 4000;
+const port = 4000; 
 
 app.use(cors());
 
-// Ruta para obtener todos los personajes
-app.get('/characters', async (req, res) => {
-    try {
-        const response = await axios.get('https://rickandmortyapi.com/api/character/');
-        res.json(response.data.results);
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+app.get('/characters', (req, res) => {
+    res.send('Cocreta!');
 });
 
-// Ruta para obtener un personaje por nombre
-app.get('/characters/:name', async (req, res) => {
-    const characterName = req.params.name;
-    
+app.get('/characters/:characterName', async (req, res) => {
+    const characterName = req.params.characterName;
+    const apiUrl = `https://rickandmortyapi.com/api/character/?name=${characterName}`;
+
     try {
-        const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${characterName}`);
-        
-        if (response.data.results.length > 0) {
-            res.json(response.data.results[0]);
-        } else {
-            res.status(404).json({ error: 'Character not found' });
+        const response = await axios.get(apiUrl);
+        const characterData = response.data.results[0];
+
+        if (!characterData) {
+            throw new Error('Personaje no encontrado');
         }
+
+        const { name, status, species, gender, origin, image } = characterData;
+        res.json({ name, status, species, gender, origin: origin.name, image });
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(404).json({ error: 'Personaje no encontrado' });
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(4000, () => {
+    console.log(`express está escuchando en el puerto http://localhost:4000`);
 });
