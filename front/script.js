@@ -9,12 +9,12 @@ function getRickCharacters() {
         .then(data => {
             const { name, status, species, gender, origin, image } = data;
             rickInfo.innerHTML = `
-                <h2>${name}</h2>
+                <h2> ${name}</h2>
                 <img src="${image}" alt="${name}" />
-                <p>${status}</p>
-                <p>${species}</p>
-                <p>${gender}</p>
-                <p>${origin}</p>
+                <p>status: ${status}</p>
+                <p>species: ${species}</p>
+                <p>gender: ${gender}</p>
+                <p>origin:${origin}</p>
             `;
         })
         .catch(error => {
