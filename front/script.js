@@ -11,10 +11,10 @@ function getRickCharacters() {
             rickInfo.innerHTML = `
                 <h2> ${name}</h2>
                 <img src="${image}" alt="${name}" />
-                <p>status: ${status}</p>
-                <p>species: ${species}</p>
-                <p>gender: ${gender}</p>
-                <p>origin:${origin}</p>
+                <p>Status: ${status}</p>
+                <p>Species: ${species}</p>
+                <p>Sender: ${gender}</p>
+                <p>Origin: ${origin}</p>
             `;
         })
         .catch(error => {
