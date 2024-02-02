@@ -19,6 +19,6 @@ function getRickCharacters() {
         })
         .catch(error => {
             rickInfo.innerHTML = `<p>Imposible acceder al personaje</p>`;
-            console.error('Error fetching character data:', error);
+            console.error('Error de servidor:', error);
         });
 }
